@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// GitHub Pages: https://<user>.github.io/hushmic/
+const base = process.env.CI ? '/hushmic/' : '/'
+
 // https://vite.dev/config/
 export default defineConfig({
+  base,
   plugins: [react()],
   // 仅 localhost 时，用手机 / 同网其它电脑访问会「拒绝连接」；监听 0.0.0.0 可局域网打开
   server: {
