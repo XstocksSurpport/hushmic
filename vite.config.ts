@@ -1,8 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// GitHub Pages: https://<user>.github.io/hushmic/
-const base = process.env.CI ? '/hushmic/' : '/'
+// GitHub Pages 需要子路径 /hushmic/；Vercel 根目录部署必须用 '/'
+// 注意：Vercel 与 GitHub Actions 都会设 CI=true，不能只用 CI 判断
+const base =
+  process.env.VERCEL === '1' || process.env.VERCEL === 'true'
+    ? '/'
+    : process.env.CI
+      ? '/hushmic/'
+      : '/'
 
 // https://vite.dev/config/
 export default defineConfig({
